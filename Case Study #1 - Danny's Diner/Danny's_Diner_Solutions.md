@@ -248,148 +248,82 @@ ON s.product_id = c3.product_id
 GROUP BY  customer_id
 ```
 #### Result
-![image](https://user-images.githubusercontent.com/101379141/195244002-ea3699a8-48c4-48ca-9f62-dd28477836f2.png)
+![image](https://user-images.githubusercontent.com/101379141/195244511-27eeec89-23af-4bb1-b52b-eccd64d04a7a.png)
 
 
 # 
 
 ### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 
-- On the week the customer joins (from join date to 7 days after) $1 = 20 points.
-- Every other day $1 = 10 points.
-- For this we can create 2 CTE's, one to calculate join week points and another for normal day points.
-  - For the `join_week_points CTE`:
-    - Here we want to calculate the points earned by each customer on their join week.
-    - Multiply the price x 20 and SUM all the points.
-    - Use a `WHERE` clause to filter only the items purchased `BETWEEN` the join date and 7 days after (a week).
-  - For the `normal_points CTE`:
-    - Here we want to calculate the points earned by each customer for the month of January, excluding the join week.
-    - Use the same SUM function with the CASE statement as for the previous question.
-    - Use a `WHERE` clause to filter the items puchased on the `month of January` (MONTH(order_date) = 1). 
-    - AND the items purchased `NOT BETWEEN` the join date and 7 days after (filter out join week).
-- From those CTE's we want to select the customer_id's and the sum of join_week_points and normal_points.
+- I create a CTE table with valid_date that include 1 week after joining and end of January column
+- For sushi earn x2 point, and items between join_date and valid_date earn x2 point (first week joining)
+- I also including condition within January order_date <= last_date
 
 ```sql
-WITH 
-     join_week_points AS (
-                         SELECT s.customer_id,
-                                SUM(m.price * 20) AS join_week_points
-                         FROM   sales AS s
-                         JOIN   menu AS m
-                         ON     s.product_id = m.product_id
-                         JOIN   members AS c
-                         ON     s.customer_id = c.customer_id
-                         WHERE  s.order_date BETWEEN c.join_date AND DATEADD(DAY, 7, c.join_date)
-                         GROUP  BY s.customer_id
-                         ),
+WITH dates_cte AS(
+	SELECT *, 
+		DATEADD(DAY, 6, join_date) AS valid_date, 
+		EOMONTH('2021-01-1') AS last_date
+	FROM members
+)
 
-     normal_points   AS (
-                         SELECT s.customer_id,
-                                SUM(CASE 
-                                        WHEN m.product_name = 'sushi' 
-                                        THEN m.price * 20 
-                                        ELSE m.price * 10 
-                                    END) AS normal_points
-                         FROM   sales AS s
-                         JOIN   menu AS m
-                         ON     s.product_id = m.product_id
-                         JOIN   members AS c
-                         ON     s.customer_id = c.customer_id
-                         WHERE  MONTH(s.order_date) = 1
-                         AND    s.order_date NOT BETWEEN c.join_date AND DATEADD(DAY, 7, c.join_date)
-                         GROUP  BY s.customer_id
-                         )
-SELECT j.customer_id,
-       j.join_week_points + n.normal_points AS total_points_january
-FROM   join_week_points AS j
-JOIN   normal_points AS n
-ON     j.customer_id = n.customer_id
+SELECT
+	s.customer_id,
+	sum(CASE
+		WHEN s.product_id = 1 THEN price*20
+		WHEN s.order_date between d.join_date and d.valid_date THEN price*20
+		ELSE price*10 
+	END) as total_points
+FROM
+	dates_cte d,
+	sales s,
+	menu m
+WHERE
+	d.customer_id = s.customer_id
+	AND
+	m.product_id = s.product_id
+	AND
+	s.order_date <= d.last_date
+GROUP BY s.customer_id;
 ```
 #### Result
-![image](https://user-images.githubusercontent.com/94410139/158180650-7806642f-356b-4bac-bbae-36d02cc3e0ee.png)
+![image](https://user-images.githubusercontent.com/101379141/195245665-a61d3320-82bb-4908-af12-5c787c2f32e1.png)
 
 ---
 
 ## Bonus Questions
 
-### 1. Join All Things
 
-- Replicate this output:
-
-  <img width="300" src="https://user-images.githubusercontent.com/94410139/158183700-39da11dc-067d-42e7-8367-86dc3c182031.png">
-#    
-- For this we can use `CASE WHEN EXISTS`:
-  - When the `customer_id EXISTS in the members table and the order_date is after or on the join_date` then 'Y' (they are a member at that time), else 'N' (they are not).
- 
-```sql
-SELECT s.customer_id,
-       s.order_date,
-       m.product_name,
-       m.price,
-       CASE 
-           WHEN EXISTS ( 
-                        SELECT customer_id
-                        FROM   members AS c
-                        WHERE  s.customer_id = c.customer_id
-                        AND    s.order_date >= c.join_date
-                        )
-		   THEN 'Y'
-		   ELSE 'N'
-           END AS member
-FROM   sales AS s
-JOIN   menu AS m
-ON     s.product_id = m.product_id
-```
-#### Result
-![image](https://user-images.githubusercontent.com/94410139/158208767-322aa72f-cb40-4f86-9b1b-327625381b52.png)
-
-#
-
-### 2. Rank All Things
+###  Rank All Things
 
 - Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
 - Replicate this output:
 
   <img width="300" src="https://user-images.githubusercontent.com/94410139/158209150-dc41af27-5565-42b7-9fea-af8f553f6801.png">
 #
-- For this create a CTE with the joined table from the last question.
+- For this create a CTE (named as member_table) to have column 'member' by order_date >= join_date.
 - Then SELECT everything from that table and add a new column for the ranking.
    - For the RANK we need to `PARTITION by both customer_id and member`.
    - You can use RANK or DENSE_RANK.
  
  ```sql
- WITH joined_table AS (
-                       SELECT s.customer_id,
-                              s.order_date,
-                              s.product_id,
-                              m.product_name,
-                              m.price,
-                              CASE 
-                                  WHEN EXISTS ( 
-                                               SELECT customer_id
-                                               FROM   members AS c
-                                               WHERE  s.customer_id = c.customer_id
-                                               AND    s.order_date >= c.join_date
-                                               )
-                                  THEN 'Y'
-                                  ELSE 'N'
-                              END AS member			                 
-                       FROM   sales AS s
-                       JOIN   menu AS m
-                       ON     s.product_id = m.product_id
-                       )
-SELECT customer_id,
-        order_date,
-        product_name,
-        price,
-        member,
-        CASE  
-            WHEN member = 'Y'
-            THEN DENSE_RANK() OVER(PARTITION BY customer_id, member ORDER BY order_date)
-            ELSE NULL
-        END AS ranking
-FROM   joined_table
+WITH member_table as (SELECT  s.customer_id,
+			s.order_date,m.product_name,m.price,
+    			CASE WHEN s.order_date >= me.join_date THEN 'Y'
+        		ELSE 'N'  END AS member
+		      FROM sales s
+		      INNER JOIN menu m ON s.product_id = m.product_id
+		      LEFT JOIN members me ON s.customer_id = me.customer_id
+		)
+SELECT  customer_id,
+	order_date,
+	product_name,
+	price,
+	member,
+    CASE WHEN member ='N' THEN NULL 
+    ELSE RANK() OVER(PARTITION BY customer_id, member ORDER BY order_date) END AS ranking
+FROM member_table
  ```
 #### Result
-![image](https://user-images.githubusercontent.com/94410139/158212209-f8c8a19f-197a-4db0-bb8b-592cb629251a.png)
+![image](https://user-images.githubusercontent.com/101379141/195246512-67e21eb2-0c3b-4795-81b8-f6d4ea650f1f.png)
 
