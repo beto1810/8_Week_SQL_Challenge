@@ -295,8 +295,8 @@ GROUP BY s.customer_id;
 
 - Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
 - Replicate this output:
-  <img width="300" src ="https://user-images.githubusercontent.com/101379141/195248839-b0d64ca9-7fc5-4e5e-bcd4-2db9769844a5.png">
 
+  <img width="300" src ="https://user-images.githubusercontent.com/101379141/195248839-b0d64ca9-7fc5-4e5e-bcd4-2db9769844a5.png">
   <img width="300" src="https://user-images.githubusercontent.com/94410139/158209150-dc41af27-5565-42b7-9fea-af8f553f6801.png">
 #
 - Join all Thing :For this create a CTE (named as member_table) to have column 'member' by order_date >= join_date.
