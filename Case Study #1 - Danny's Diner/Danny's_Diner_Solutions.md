@@ -22,9 +22,10 @@ GROUP BY customer_id;
 ### 2. How many days has each customer visited the restaurant?
 
 ```sql
-SELECT sales.customer_id, count(distinct sales.order_date) as Total_days
+SELECT  sales.customer_id, 
+        count(distinct sales.order_date) as Total_days
 FROM sales 
-GROUP BY sales.customer_id
+GROUP BY sales.customer_id;
 ```
 #### Result
 ![image](https://user-images.githubusercontent.com/101379141/195240029-ed43606c-04e1-4294-a556-d7e5ef63c733.png)
@@ -42,11 +43,13 @@ GROUP BY sales.customer_id
 
 ```sql
 WITH PURCHASED_RANK AS (
-    SELECT customer_id, order_date,product_name, 
-    DENSE_RANK() OVER(ORDER BY order_date ) AS RANK
-    FROM sales
-    INNER JOIN menu
-    ON sales.product_id = menu.product_id 
+    			SELECT customer_id, 
+			       order_date,
+			       product_name, 
+    			       DENSE_RANK() OVER(ORDER BY order_date ) AS RANK
+			FROM sales
+			INNER JOIN menu
+			ON sales.product_id = menu.product_id 
 )
 SELECT customer_id,product_name
 FROM PURCHASED_RANK 
@@ -96,15 +99,15 @@ ORDER BY most_purchased DESC
 
 ```sql
 WITH rank_favorite_item AS (
-    		SELECT customer_id,
-		       product_name, 
-		       COUNT(sales.product_id) AS NUMBER_ORDER,
-     		       rank() OVER(PARTITION BY customer_id 
-     		ORDER BY COUNT(sales.product_id) DESC) AS RANK
-    		FROM sales
-    		INNER JOIN menu
-   		ON sales.product_id = menu.product_id
-   		GROUP BY customer_id,product_name
+				SELECT customer_id,
+				       product_name, 
+				       COUNT(sales.product_id) AS NUMBER_ORDER,
+				       rank() OVER(PARTITION BY customer_id 
+				ORDER BY COUNT(sales.product_id) DESC) AS RANK
+				FROM sales
+				INNER JOIN menu
+				ON sales.product_id = menu.product_id
+				GROUP BY customer_id,product_name
 )
 SELECT customer_id,product_name,NUMBER_ORDER
 FROM rank_favorite_item
@@ -137,17 +140,17 @@ WHERE RANK =1;
 
 ```sql
 WITH rank_purchase_item AS(
-    	     SELECT sales.customer_id, 
-                    product_name, 
-		    order_date, 
-		    join_date,
-                    DENSE_RANK() OVER(Partition by sales.customer_id ORDER BY order_date) AS RANK 
-             FROM sales 
-	     INNER JOIN menu
-	     ON sales.product_id = menu.product_id
-	     INNER JOIN members
-	     ON sales.customer_id = members.customer_id
-	     WHERE sales.order_date >= members.join_date
+			     SELECT sales.customer_id, 
+				    product_name, 
+				    order_date, 
+				    join_date,
+				    DENSE_RANK() OVER(Partition by sales.customer_id ORDER BY order_date) AS RANK 
+			     FROM sales 
+			     INNER JOIN menu
+			     ON sales.product_id = menu.product_id
+			     INNER JOIN members
+			     ON sales.customer_id = members.customer_id
+			     WHERE sales.order_date >= members.join_date
 )
 SELECT customer_id, product_name
 FROM rank_purchase_item
@@ -234,18 +237,18 @@ GROUP BY sales.customer_id;
  
 
 ```sql
-WITH CTE3 AS(
-    SELECT product_id,product_name, price,
-    CASE WHEN product_name = 'sushi' THEN price *20 
-         ELSE price * 10 END AS point 
-    FROM menu 
+WITH point_table AS(
+                    SELECT product_id,product_name, price,
+                    CASE WHEN product_name = 'sushi' THEN price *20 
+                        ELSE price * 10 END AS point 
+                    FROM menu 
 )
 
 SELECT customer_id, sum(point ) as total_point
 FROM sales s
-INNER JOIN CTE3 c3
-ON s.product_id = c3.product_id
-GROUP BY  customer_id
+INNER JOIN point_table p
+ON s.product_id = p.product_id
+GROUP BY  customer_id;
 ```
 #### Result
 ![image](https://user-images.githubusercontent.com/101379141/195244511-27eeec89-23af-4bb1-b52b-eccd64d04a7a.png)
@@ -261,29 +264,23 @@ GROUP BY  customer_id
 
 ```sql
 WITH dates_cte AS(
-	SELECT *, 
-		DATEADD(DAY, 6, join_date) AS valid_date, 
-		EOMONTH('2021-01-1') AS last_date
-	FROM members
+		SELECT *, 
+			DATEADD(DAY, 6, join_date) AS valid_date, 
+			EOMONTH('2021-01-1') AS last_date
+		FROM members
 )
 
-SELECT
-	s.customer_id,
-	sum(CASE
-		WHEN s.product_id = 1 THEN price*20
+SELECT s.customer_id,
+	sum(CASE WHEN s.product_id = 1 THEN price*20
 		WHEN s.order_date between d.join_date and d.valid_date THEN price*20
 		ELSE price*10 
 	END) as total_points
-FROM
-	dates_cte d,
-	sales s,
-	menu m
-WHERE
-	d.customer_id = s.customer_id
-	AND
-	m.product_id = s.product_id
-	AND
-	s.order_date <= d.last_date
+FROM dates_cte d,
+     sales s,
+     menu m
+WHERE d.customer_id = s.customer_id 
+	AND m.product_id = s.product_id
+	AND s.order_date <= d.last_date
 GROUP BY s.customer_id;
 ```
 #### Result
@@ -307,13 +304,13 @@ GROUP BY s.customer_id;
    - You can use RANK or DENSE_RANK.
  
  ```sql
-WITH member_table as (SELECT  s.customer_id,
-			s.order_date,m.product_name,m.price,
-    			CASE WHEN s.order_date >= me.join_date THEN 'Y'
-        		ELSE 'N'  END AS member
-		      FROM sales s
-		      INNER JOIN menu m ON s.product_id = m.product_id
-		      LEFT JOIN members me ON s.customer_id = me.customer_id
+WITH member_table as (  SELECT  s.customer_id,
+                                s.order_date,m.product_name,m.price,
+                                CASE WHEN s.order_date >= me.join_date THEN 'Y'
+                                ELSE 'N'  END AS member
+                        FROM sales s
+                        INNER JOIN menu m ON s.product_id = m.product_id
+                        LEFT JOIN members me ON s.customer_id = me.customer_id
 		)
 SELECT  customer_id,
 	order_date,
