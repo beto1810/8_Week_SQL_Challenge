@@ -47,15 +47,15 @@ DROP TABLE IF EXISTS #runner_orders
 SELECT  order_id, 
         runner_id,
         CASE 
-          WHEN pickup_time LIKE 'null' THEN ' '
+          WHEN pickup_time LIKE 'null' THEN NULL
           ELSE pickup_time 
           END AS pickup_time,
         CASE 
-          WHEN distance LIKE 'null' THEN ' '
+          WHEN distance LIKE 'null' THEN NULL
           WHEN distance LIKE '%km' THEN TRIM('km' from distance) 
           ELSE distance END AS distance,
         CASE 
-          WHEN duration LIKE 'null' THEN ' ' 
+          WHEN duration LIKE 'null' THEN NULL 
           WHEN duration LIKE '%mins' THEN TRIM('mins' from duration) 
           WHEN duration LIKE '%minute' THEN TRIM('minute' from duration)        
           WHEN duration LIKE '%minutes' THEN TRIM('minutes' from duration)       
@@ -65,10 +65,10 @@ SELECT  order_id,
           WHEN cancellation = '' THEN NULL
           ELSE cancellation END AS cancellation
 INTO #runner_orders
-FROM runner_orders
+FROM runner_orders;
 ```
 #### Cleaned Table:
-![image](https://user-images.githubusercontent.com/101379141/195288627-cdae5f7a-f238-4693-b877-30b793015c09.png)
+![image](https://user-images.githubusercontent.com/101379141/195291586-76484f29-f489-479d-a070-341ffce6783d.png)
 
 # 
 ### 3. Changing data types
