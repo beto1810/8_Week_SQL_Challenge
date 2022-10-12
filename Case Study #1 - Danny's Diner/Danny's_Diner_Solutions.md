@@ -27,7 +27,7 @@ FROM sales
 GROUP BY sales.customer_id
 ```
 #### Result
-![image](![image](https://user-images.githubusercontent.com/101379141/195239971-82687b9c-80f1-4e5b-b332-0af6c8b80ca0.png))
+![image](https://user-images.githubusercontent.com/101379141/195240029-ed43606c-04e1-4294-a556-d7e5ef63c733.png)
 
 #
 
