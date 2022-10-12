@@ -1,7 +1,7 @@
 # 🍜 Case Study #1 - Danny's Diner
 
 - Case Study #1 Information: [Click Here!](https://8weeksqlchallenge.com/case-study-1/)
-- Case Study #1 solutions: [Click Here!](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%231%20-%20Danny's%20Diner/CaseStudy_1.sql)
+- Case Study #1 solutions: [Click Here!](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%231%20-%20Danny's%20Diner/Danny's_Diner_Solutions.md)
 #
 <img width="200" src="https://user-images.githubusercontent.com/94410139/158028436-eba944af-bdcc-459f-9c2f-fbd868c6c0c1.png">
 
