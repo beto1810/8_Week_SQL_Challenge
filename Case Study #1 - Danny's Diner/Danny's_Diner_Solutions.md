@@ -34,39 +34,34 @@ GROUP BY sales.customer_id
 ### 3. What was the first item from the menu purchased by each customer?
 
 
-- Create a `CTE`: 
-  - In it, create a new column to show a `ranking of the items purchased by each customer (customer_id) based on the date of purchase (order_date)`.
-    - Rank 1 will be the first item purchased (the one with the earliest date), 2 the second...
-    - For this you can use `RANK` or `DENSE_RANK`.
-      - The difference between RANK & DENSE_RANK: 
-         - Imagine there are 3 people in a race and 2 are in 1st place RANK's output would be 1st, 1st, 3rd and DENSE_RANK's output would be 1st, 1st, 2nd. 
-- From that CTE we then want to `select the first item purchased by each customer`. 
-  - This is `WHERE rank = 1`
+- Create a  Common Table Expressions (CTE), I named it as PURCHASED_RANK: 
+  - In it, create a new column to show a `ranking of the items purchased by each customer (customer_id) based on the date of purchase (order_date):
+    - Rank 1 will be the first item purchased with the earliest date
+    - For this you can use `RANK` or `DENSE_RANK`(I use DENSE_RANK  in this case)
+
 
 ```sql
-WITH purchase_order_rank AS (
-                             SELECT s.customer_id,
-                                    s.order_date,
-                                    m.product_name,
-                                    DENSE_RANK() OVER(PARTITION BY s.customer_id ORDER BY s.order_date) AS rank
-                             FROM   sales AS s
-                             JOIN   menu AS m
-                             ON     s.product_id = m.product_id
-                             GROUP  BY s.customer_id, s.order_date, m.product_name
-                             )
-SELECT customer_id,
-       product_name AS first_item_purchased,
-       order_date
-FROM   purchase_order_rank
-WHERE  rank = 1
+WITH PURCHASED_RANK AS (
+    SELECT customer_id, order_date,product_name, 
+    DENSE_RANK() OVER(ORDER BY order_date ) AS RANK
+    FROM sales
+    INNER JOIN menu
+    ON sales.product_id = menu.product_id 
+)
+SELECT customer_id,product_name
+FROM PURCHASED_RANK 
+WHERE RANK =1 
+GROUP BY customer_id,product_name;
 ```
-#### purchase_order_rank table output:
+#### PURCHASED_RANK table output:
 
-  ![image](https://user-images.githubusercontent.com/94410139/158033738-ec9f6314-d897-4471-9fd4-156ac67546a5.png)
+  ![image](https://user-images.githubusercontent.com/101379141/195240779-8e92b247-2439-4d05-a9e5-5d8c5b91c062.png)
+
   
 #### Question Result: 
 
-  ![image](https://user-images.githubusercontent.com/94410139/158037120-df2db300-0d37-4b6c-b45e-6795854f41b3.png)
+  ![image](https://user-images.githubusercontent.com/101379141/195240845-06d17220-da1c-4c36-8705-442f4b45ad34.png)
+
 
   - Customer A's first orders were Curry & Sushi
   - Customer B's was Curry
@@ -77,23 +72,22 @@ WHERE  rank = 1
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
  
  ```sql
-SELECT TOP 1
-        m.product_name,
-        COUNT(s.product_id) AS times_purchased
-FROM   sales AS s
-JOIN   menu AS m
-ON     s.product_id = m.product_id
-GROUP  BY product_name
-ORDER  BY COUNT(s.product_id) DESC
+SELECT TOP 1 (COUNT(s.product_id)) AS most_purchased, product_name
+FROM dbo.sales AS s
+JOIN dbo.menu AS m
+ ON s.product_id = m.product_id
+GROUP BY s.product_id, product_name
+ORDER BY most_purchased DESC
  ```
  #### Result
-![image](https://user-images.githubusercontent.com/94410139/158037436-1221ab5d-4e99-4b4f-bcbe-76f4fbbc053b.png)
+![image](https://user-images.githubusercontent.com/101379141/195241146-aaad00b0-3f07-4922-9a71-2008899df3c5.png)
+
 
 #
 
 ### 5. Which item was the most popular for each customer?
 
-- Create a `CTE`  
+- Create a `CTE` names as rank_favorite_item 
 - In it, create a new column to show a `ranking of the items purchased by each customer (customer_id) based on the times purchased (COUNT of product_id).
   - Rank 1 will be the most purchased item, 2 the second...
   - For this you can use RANK or DENSE_RANK.
@@ -101,40 +95,40 @@ ORDER  BY COUNT(s.product_id) DESC
   - This is `WHERE rank = 1`
 
 ```sql
-WITH favourite_item_rank AS (
-                             SELECT s.customer_id,
-                                    m.product_name,
-                                    COUNT(s.product_id) AS times_purchased,
-                                    DENSE_RANK() OVER(PARTITION BY s.customer_id ORDER BY COUNT(s.product_id) DESC) AS rank
-                             FROM   sales AS s
-                             JOIN   menu AS m
-                             ON     s.product_id = m.product_id
-                             GROUP  BY s.customer_id, m.product_name
-                             )
-SELECT customer_id,
-       product_name AS favourite_item,
-       times_purchased
-FROM   favourite_item_rank
-WHERE  rank = 1
+WITH rank_favorite_item AS (
+    		SELECT customer_id,
+		       product_name, 
+		       COUNT(sales.product_id) AS NUMBER_ORDER,
+     		       rank() OVER(PARTITION BY customer_id 
+     		ORDER BY COUNT(sales.product_id) DESC) AS RANK
+    		FROM sales
+    		INNER JOIN menu
+   		ON sales.product_id = menu.product_id
+   		GROUP BY customer_id,product_name
+)
+SELECT customer_id,product_name,NUMBER_ORDER
+FROM rank_favorite_item
+WHERE RANK =1;
 ```
 
-#### favourite_item_rank table output:
-  ![image](https://user-images.githubusercontent.com/94410139/158037640-75e76fcb-31f8-4abf-b4ab-d4cf83775cec.png) 
+#### rank_favorite_item table output:
+  ![image](https://user-images.githubusercontent.com/101379141/195241494-fe29e637-b037-41a5-97ac-2624e5a0c3eb.png)
+
 
 #### Question Result:
-  ![image](https://user-images.githubusercontent.com/94410139/158037660-31e9a5c2-d231-4f54-a140-70f2ffec7a3e.png)
+  ![image](https://user-images.githubusercontent.com/101379141/195241578-55a26af0-874a-432c-916c-02f4055ae9f8.png)
 
 - Customer A's favourite item is Ramen
-- Customer B likes all items equally
-- Customer C loves Ramen
+- Customer B likes all items 
+- Customer C likes Ramen
 
 #
 
 ### 6. Which item was purchased first by the customer after they became a member?
 
-- Create a `CTE`
+- Create a `CTE` named as 'rank_purchase_item'
   - In it, create a new column to show a `ranking of the items purchased by each customer (customer_id) based on the date of purchase (order_date)`. 
-    - Rank 1 will be the first item purchased, 2 the second...
+    - Rank 1 will be the first item purchased
     - For this you can use RANK or DENSE_RANK.
   - We need to include a `WHERE clause` in the CTE as we `only want items purchased after they became a member`.
     - WHERE order_date >= join_date
@@ -142,39 +136,41 @@ WHERE  rank = 1
   - This is `WHERE rank = 1`
 
 ```sql
-WITH purchase_order_rank AS (
-                             SELECT s.customer_id,
-                                    s.order_date,
-                                    m.product_name,
-                                    c.join_date,
-                                    DENSE_RANK() OVER(PARTITION BY s.customer_id ORDER BY s.order_date) AS rank
-                             FROM   sales AS s
-                             JOIN   menu AS m
-                             ON     s.product_id = m.product_id
-                             JOIN   members AS c
-                             ON     s.customer_id = c.customer_id
-                             WHERE  s.order_date >= c.join_date
-                             )
-SELECT customer_id,
-       product_name AS first_item_purchased,
-       join_date,
-       order_date
-FROM   purchase_order_rank 
-WHERE  rank = 1
+WITH rank_purchase_item AS(
+    	     SELECT sales.customer_id, 
+                    product_name, 
+		    order_date, 
+		    join_date,
+                    DENSE_RANK() OVER(Partition by sales.customer_id ORDER BY order_date) AS RANK 
+             FROM sales 
+	     INNER JOIN menu
+	     ON sales.product_id = menu.product_id
+	     INNER JOIN members
+	     ON sales.customer_id = members.customer_id
+	     WHERE sales.order_date >= members.join_date
+)
+SELECT customer_id, product_name
+FROM rank_purchase_item
+WHERE RANK =1;
 ```
-#### Result
-![image](https://user-images.githubusercontent.com/94410139/158038017-f42bd6be-0bf4-44af-8251-0d1931edd91b.png)
+#### rank_purchase_item table output:
 
-- Customer A purchased Curry on the day they joined
-- Customer B puchased Sushi 2 days after joining
+![image](https://user-images.githubusercontent.com/101379141/195242365-6a550795-7b3e-4ed4-ab3d-b82ff8e90685.png)
+
+
+#### Result
+![image](https://user-images.githubusercontent.com/101379141/195242423-438ec3b1-a5dc-47af-81e9-6c1c19242aaa.png)
+
+- Customer A purchased Curry firstly 
+- Customer B puchased Sushi firstly
 
 #
 
 ### 7. Which item was purchased just before the customer became a member?
 
-- Create a `CTE`
+- Create a `CTE` as rank_purchase_order
   - In it, create a new column to show a `ranking of the items purchased by each customer (customer_id) based on the date of purchase (order_date) in descending order`. 
-    - Rank 1 will be the last item purchased (the item purchased on latest date), 2 the second...
+    - Rank 1 will be the last item purchased (the item purchased on latest date)
     - For this you can use RANK or DENSE_RANK.
   - We need to include a `WHERE clause` in the CTE as we `only want items purchased before they became a member`.
     - WHERE order_date < join_date
@@ -182,28 +178,26 @@ WHERE  rank = 1
   - This is `WHERE rank = 1`
 
 ```sql
-WITH purchase_order_rank AS (
-                             SELECT s.customer_id,
-                                    s.order_date,
-                                    m.product_name,
-                                    c.join_date,
-                                    DENSE_RANK() OVER(PARTITION BY s.customer_id ORDER BY s.order_date DESC) AS rank
-                             FROM   sales AS s
-                             JOIN   menu AS m
-                             ON     s.product_id = m.product_id
-                             JOIN   members AS c
-                             ON     s.customer_id = c.customer_id
-                             WHERE  s.order_date < c.join_date
+WITH rank_purchase_order AS (
+                            SELECT sales.customer_id, 
+			     	    product_name, 
+				    order_date, 
+				    join_date,
+    				    DENSE_RANK() OVER(Partition by sales.customer_id ORDER BY order_date DESC) AS RANK 
+   			    FROM sales 
+			    INNER JOIN menu
+			    ON sales.product_id = menu.product_id
+			    INNER JOIN members
+			    ON sales.customer_id = members.customer_id
+			    WHERE sales.order_date < members.join_date
                              )
-SELECT customer_id,
-       product_name AS last_item_purchased,
-       order_date,
-       join_date
-FROM   purchase_order_rank 
-WHERE  rank = 1
+SELECT customer_id, product_name
+FROM rank_purchase_order
+WHERE RANK =1
 ```
 #### Result
-![image](https://user-images.githubusercontent.com/94410139/158038173-69c72231-a4bc-4cc8-a0ff-12e0175a2b8d.png)
+![image](https://user-images.githubusercontent.com/101379141/195243167-bd39a9d5-86c5-4cfb-839c-8693d6cda346.png)
+
 
 - Customer A's last item purchased before becoming a member was Sushi & Curry
 - Customer B's was Sushi
@@ -213,19 +207,19 @@ WHERE  rank = 1
 ### 8. What is the total items and amount spent for each member before they became a member?
 
 ```sql
-SELECT s.customer_id,
-       COUNT(s.product_id) AS total_items,
-       SUM(m.price) AS total_amount_spent
-FROM   sales AS s
-JOIN   menu AS m
-ON     s.product_id = m.product_id
-JOIN   members AS c
-ON     s.customer_id = c.customer_id
-WHERE  s.order_date < c.join_date
-GROUP  BY s.customer_id
+SELECT  sales.customer_id,
+        count(product_name) as total_item, 
+        SUM(price) as Total_amount_spent
+FROM sales 
+INNER JOIN menu
+ON sales.product_id = menu.product_id
+INNER JOIN members
+ON sales.customer_id = members.customer_id
+WHERE sales.order_date < members.join_date
+GROUP BY sales.customer_id;
 ```
 #### Result
-![image](https://user-images.githubusercontent.com/94410139/158038247-42d3c14b-2d0d-47ba-bf40-e82b78b2a39d.png)
+![image](https://user-images.githubusercontent.com/101379141/195243359-53025f99-414e-4872-a41a-6121f4af2a71.png)
 
 #
 
@@ -233,25 +227,29 @@ GROUP  BY s.customer_id
 
 - Every $1 = 10 points.
 - For sushi $1 = 20 points (2 x 10). 
-- We want to SUM each customers points. 
-  - One way to do this is using the `SUM funcion with a CASE statement`:
-       - When the product name is sushi then multiply the price by 20, when not then multiply it by 10.
-       - Then sum all the points.
+- We want to create point column of each type product through CTE :
+	- When the product name is sushi then multiply the price by 20, when not then multiply it by 10.
+- Then sum all the points.
+
+ 
 
 ```sql
-SELECT s.customer_id,
-       SUM(CASE 
-               WHEN m.product_name = 'sushi' 
-               THEN m.price * 20 
-               ELSE m.price * 10 
-           END) AS total_points
-FROM   sales AS s
-JOIN   menu AS m
-ON     s.product_id = m.product_id
-GROUP  BY s.customer_id
+WITH CTE3 AS(
+    SELECT product_id,product_name, price,
+    CASE WHEN product_name = 'sushi' THEN price *20 
+         ELSE price * 10 END AS point 
+    FROM menu 
+)
+
+SELECT customer_id, sum(point ) as total_point
+FROM sales s
+INNER JOIN CTE3 c3
+ON s.product_id = c3.product_id
+GROUP BY  customer_id
 ```
 #### Result
-![image](https://user-images.githubusercontent.com/94410139/158038528-a4c8f4b2-72cf-4503-9cbb-037d93f2bc18.png)
+![image](https://user-images.githubusercontent.com/101379141/195244002-ea3699a8-48c4-48ca-9f62-dd28477836f2.png)
+
 
 # 
 
