@@ -22,13 +22,12 @@ GROUP BY customer_id;
 ### 2. How many days has each customer visited the restaurant?
 
 ```sql
-SELECT customer_id,
-       COUNT(DISTINCT order_date) AS total_days_visited
-FROM   sales
-GROUP  BY customer_id
+SELECT sales.customer_id, count(distinct sales.order_date) as Total_days
+FROM sales 
+GROUP BY sales.customer_id
 ```
 #### Result
-![image](https://user-images.githubusercontent.com/94410139/158030978-74727ee7-71c3-4d60-b1a5-b77e99259771.png)
+![image](![image](https://user-images.githubusercontent.com/101379141/195239971-82687b9c-80f1-4e5b-b332-0af6c8b80ca0.png))
 
 #
 
