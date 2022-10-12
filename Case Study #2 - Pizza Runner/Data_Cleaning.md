@@ -72,7 +72,7 @@ FROM runner_orders;
 
 # 
 ### 3. Changing data types
-- For '#runner_orders' table:
+- For #runner_orders table:
   - Change pickup_time DATETIME
   - Change distance to FLOAT
   - Change duration to INT
