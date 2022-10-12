@@ -14,7 +14,7 @@ ON sales.product_id = menu.product_id
 GROUP BY customer_id;
 ```
 #### Result 
-![image]()
+![1](https://user-images.githubusercontent.com/101379141/195239786-d226d0f5-f2df-4ad5-8af7-1d4f1328c091.PNG)
 
 
 #
