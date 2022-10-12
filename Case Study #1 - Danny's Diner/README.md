@@ -27,6 +27,13 @@ Danny’s Diner is in need of your assistance to help the restaurant stay afloat
 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 
+### Bonus Question 
+- Rank All The Things 
+![image](https://user-images.githubusercontent.com/101379141/195248335-af513f94-0484-46d7-9047-aa8c3308f958.png) 
+- Join All The Things 
+![image](https://user-images.githubusercontent.com/101379141/195248416-7909d18a-0bd6-4248-8d1e-09fc8dcf1522.png)
+
+
 ## What method do you apply with Case Study #1?
 - JOINS
 - Aggregate Functions
