@@ -297,7 +297,9 @@ GROUP BY s.customer_id;
 - Replicate this output:
 
   <img width="300" src ="https://user-images.githubusercontent.com/101379141/195248839-b0d64ca9-7fc5-4e5e-bcd4-2db9769844a5.png">
-  <img width="300" src="https://user-images.githubusercontent.com/94410139/158209150-dc41af27-5565-42b7-9fea-af8f553f6801.png">
+  <img width="300" src="https://user-images.githubusercontent.com/101379141/195249157-85f417e7-47e4-4f51-b951-9a19f608290d.png">
+ 
+
 #
 - Join all Thing :For this create a CTE (named as member_table) to have column 'member' by order_date >= join_date.
 - Rank All Things :Then SELECT everything from that table and add a new column for the ranking.
