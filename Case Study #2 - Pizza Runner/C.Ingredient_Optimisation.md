@@ -326,4 +326,4 @@ order by times_used_topping desc;
 #### Fragment of ingredients CTE
 ![image](https://user-images.githubusercontent.com/101379141/195499293-117f860d-c191-4243-9b72-5a224317a170.png)
 #### Final Result
-![image](![image](https://user-images.githubusercontent.com/101379141/195499133-26048983-9e55-48e8-93bd-d24fac370779.png))
+![image](https://user-images.githubusercontent.com/101379141/195500818-de57476b-78e3-445d-a985-d10e4504fdca.png)
