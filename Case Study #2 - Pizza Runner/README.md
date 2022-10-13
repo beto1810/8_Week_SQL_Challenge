@@ -36,7 +36,7 @@ This case study has LOTS of questions - they are broken up by area of focus incl
 10. What was the volume of orders for each day of the week?
 #
 ### B. Runner and Customer Experience
-
+[Solution](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/B.Runner_and_Customer_Experience.md)
 1. How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)
 2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
 3. Is there any relationship between the number of pizzas and how long the order takes to prepare?
@@ -47,7 +47,7 @@ This case study has LOTS of questions - they are broken up by area of focus incl
 
 #
 ### C. Ingredient Optimisation
-
+[Solution](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/C.Ingredient_Optimisation.md)
 1. What are the standard ingredients for each pizza?
 2. What was the most commonly added extra?
 3. What was the most common exclusion?
