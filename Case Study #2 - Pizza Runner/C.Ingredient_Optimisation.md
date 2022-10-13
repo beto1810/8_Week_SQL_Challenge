@@ -7,7 +7,7 @@
 - [Question Solutions](#questions)
 
 ## Data Cleaning for this section 
-### 1. Table: `pizza_recipes`
+### 1. Table: `#pizza_recipes`
 
 #### Original table:
 ![image](https://user-images.githubusercontent.com/94410139/158227609-4fd32726-4918-4368-918b-c81aa48045db.png)
@@ -17,14 +17,17 @@
 - Creating a clean temp table 
 
 ```sql
-SELECT pizza_id,
-       TRIM(value) AS topping_id
-INTO   #pizza_recipes
-FROM   pizza_recipes 
-CROSS  APPLY STRING_SPLIT(toppings, ',')
+DROP TABLE IF EXISTS #pizza_recipes;
+SELECT pizza_id, 
+        TRIM(topping_id.value) as topping_id,
+        topping_name
+INTO #pizza_recipes
+FROM pizza_recipes p
+CROSS APPLY string_split(p.toppings, ',') as topping_id
+INNER JOIN pizza_toppings p2 ON TRIM(topping_id.value) = p2.topping_id
 ```
 #### New table:
-![image](https://user-images.githubusercontent.com/101379141/195489562-fa7a8619-9671-4fab-b034-c267a3c0f9dd.png)
+![image](https://user-images.githubusercontent.com/101379141/195526923-428d7053-1021-45f2-9c7d-e96141441627.png)
 
 ## Data Cleaning for question 4-5
 ### 2. Table: `#customer_orders` 
@@ -76,19 +79,18 @@ FROM #customer_orders as c
 
 ```sql
 WITH CTE AS (
-            SELECT pizza_id, 
-                   topping_name
-            FROM #pizza_recipes p1
-            INNER JOIN pizza_toppings p2 
-            ON p1.topping_id = p2.topping_id
+              SELECT pizza_id, 
+                      topping_name
+              FROM #pizza_recipes p1
+              INNER JOIN pizza_toppings p2 
+              ON p1.topping_id = p2.topping_id
 )
 SELECT pizza_id, String_agg(topping_name,',') as Standard_toppings
 FROM CTE
 GROUP BY pizza_id;
 ```
 #### Result
-![image](https://user-images.githubusercontent.com/101379141/195489460-cc309b1e-4540-45b7-9a9a-a44aab8e2e53.png)
-
+![image](https://user-images.githubusercontent.com/101379141/195527944-fcd3b9c0-1d5b-46a2-b553-ea22945251d6.png)
 #
 ### 2. What was the most commonly added extra?
 - We use CTE, Subqueries, Unpivot method in this question:
@@ -125,11 +127,15 @@ GROUP BY topping,topping_name;
 - Same as the question above but using the `COUNT of exclusions_id`.
 
 ```sql
-WITH CTE AS (SELECT pizza_id,topping_type,topping
-FROM (SELECT pizza_id, CAST(SUBSTRING(exclusions, 1,1) AS INT) AS exclusions_1, CAST(SUBSTRING(exclusions,3,3) AS INT) as exclusions_2
-FROM #customer_orders
-WHERE exclusions is not null) p 
-UNPIVOT (topping for topping_type in (exclusions_1,exclusions_2)) as unpvt)
+WITH CTE AS (SELECT pizza_id,
+                    topping_type,
+                    topping
+              FROM (SELECT pizza_id, 
+                            CAST(SUBSTRING(exclusions, 1,1) AS INT) AS exclusions_1, 
+                            CAST(SUBSTRING(exclusions,3,3) AS INT) as exclusions_2
+              FROM #customer_orders
+              WHERE exclusions is not null) p 
+              UNPIVOT (topping for topping_type in (exclusions_1,exclusions_2)) as unpvt)
 
 SELECT Topping, 
         topping_name,
@@ -210,7 +216,7 @@ GROUP BY
 	c.record_id,
 	p.pizza_name,
   c.order_id
-ORDER BY 1;;
+ORDER BY 1;
 ```
 #### exclusions CTE output
 ![image](https://user-images.githubusercontent.com/101379141/195494327-ab4a5f84-5c32-4d32-b43f-def828ac42b3.png)
@@ -233,24 +239,14 @@ ORDER BY 1;;
 #### One way to achieve this
 - we add topping name ino pizza_recipe and Use CASE WHEN to indentify and 2x with relevant ingredient ( if they are in #extras table)
 
-#### Cleaning #pizza_recipes
-- We alter table #pizza_recipes
 
-```sql
-DROP TABLE IF EXISTS #pizza_recipes;
-SELECT pizza_id, TRIM(topping.value) as topping,topping_name
-INTO #pizza_recipes
-FROM pizza_recipes p
-CROSS APPLY string_split(p.toppings, ',') as topping
-INNER JOIN pizza_toppings p2 ON TRIM(topping.value) = p2.topping_id
-```
 #### new #pizza_recipes table 
 ![image](https://user-images.githubusercontent.com/101379141/195495321-abe45c47-fa69-49de-ba7e-87ef6465ab67.png)
 
 ```sql
 WITH INGREDIENT_CTE AS (SELECT record_id,
                                 pizza_name,
-                                CASE WHEN p1.topping in (
+                                CASE WHEN p1.topping_id in (
                                                   SELECT topping_id
                                                   FROM #extras e
                                                   WHERE C.record_id = e.record_id
@@ -261,7 +257,7 @@ WITH INGREDIENT_CTE AS (SELECT record_id,
                         FROM #customer_orders c 
                         JOIN pizza_names p2 ON c.pizza_id = p2.pizza_id
                         JOIN #pizza_recipes p1 ON c.pizza_id = p1.pizza_id
-                        WHERE p1.topping NOT IN (SELECT topping_id 
+                        WHERE p1.topping_id NOT IN (SELECT topping_id 
                                                  FROM #exclusions e 
                                                  WHERE e.record_id = c.record_id)
                       )
@@ -300,7 +296,7 @@ ORDER BY 1;
 WITH INGREDIENT_CTE AS (SELECT record_id,
                                 pizza_name, 
                                 topping_name,
-                                CASE WHEN p1.topping in (
+                                CASE WHEN p1.topping_id in (
                                   SELECT topping_id
                                   FROM #extras e
                                   WHERE C.record_id = e.record_id
@@ -311,11 +307,17 @@ WITH INGREDIENT_CTE AS (SELECT record_id,
                         JOIN pizza_names p2 ON c.pizza_id = p2.pizza_id
                         JOIN #pizza_recipes p1 ON c.pizza_id = p1.pizza_id
                         JOIN #runner_orders r ON c.order_id = r.order_id
-                        WHERE p1.topping NOT IN (SELECT topping_id 
+                        WHERE p1.topping_id NOT IN (SELECT topping_id 
                                                   FROM #exclusions e 
                                                   WHERE e.record_id = c.record_id) 
                                                   and r.cancellation is NULL
                          )
+
+SELECT topping_name, 
+        SUM(times_used_topping) AS times_used_topping
+from INGREDIENT_CTE
+GROUP BY topping_name
+order by times_used_topping desc;
 
 SELECT topping_name, 
         SUM(times_used_topping) AS times_used_topping
