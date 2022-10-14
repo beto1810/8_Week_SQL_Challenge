@@ -56,7 +56,7 @@ View my solution [here](https://github.com/beto1810/8_Week_SQL_Challenge/blob/ma
 
 ### B. Customer Transactions
 
-View my solution [here]().
+View my solution [here](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%234%20-%20Data%20Bank/B.Customer_Transactions.md).
   
 1. What is the unique count and total amount for each transaction type?
 2. What is the average total historical deposit counts and amounts for all customers?
@@ -68,6 +68,6 @@ View my solution [here]().
 - Creating Tables
 - JOINS
 - CTE's
-- Window Functions Such as LEAD() LAG() and RANK()
+- Window Functions Such as LEAD() LAG() and RANK()  SLIDING WINDOWS
 - CASE Statements
 - As well as other functions, operators and clauses, especially PERCENTILE_DISC() 
