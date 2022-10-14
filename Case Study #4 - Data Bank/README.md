@@ -46,7 +46,7 @@ This table stores all customer deposits, withdrawals and purchases made using th
 
 ### A. Customer Nodes Exploration
 
-View my solution [here]().
+View my solution [here](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%234%20-%20Data%20Bank/A.Customer_Nodes_Exploration.md).
 
 1. How many unique nodes are there on the Data Bank system?
 2. What is the number of nodes per region?
@@ -62,12 +62,7 @@ View my solution [here]().
 2. What is the average total historical deposit counts and amounts for all customers?
 3. For each month - how many Data Bank customers make more than 1 deposit and either 1 purchase or 1 withdrawal in a single month?
 4. What is the closing balance for each customer at the end of the month?
-5. Comparing the closing balance of a customer’s first month and the closing balance from their second nth, what percentage of customers:
-  - Have a negative first month balance?
-  - Have a positive first month balance?
-  - Increase their opening month’s positive closing balance by more than 5% in the following month?
-  - Reduce their opening month’s positive closing balance by more than 5% in the following month?
-  - Move from a positive balance in the first month to a negative balance in the second month?
+5. What is the percentage of customers who increase their closing balance by more than 5%?
   
 ## What can you practice with this case study?
 - Creating Tables
