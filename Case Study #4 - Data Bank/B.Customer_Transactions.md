@@ -1,4 +1,5 @@
 # 💵 Case Study #4 - Data Bank
+<p align="right"> Using Microsoft SQL Server </p>
 
 ## 🏦 Solution - B. Customer Transactions
 
