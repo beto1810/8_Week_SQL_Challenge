@@ -1,4 +1,5 @@
 # 🛒 Case Study #5 - Data Mart
+<p align="right"> Using Microsoft SQL Server </p>
 
 ## 🛍 Solution - B. Data Exploration
 
