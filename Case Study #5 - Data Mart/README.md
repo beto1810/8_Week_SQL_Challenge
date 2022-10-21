@@ -103,5 +103,12 @@ Using this analysis approach - answer the following questions:
 3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?
 
 ***
-
+#
+## What can you practice with this case study?
+- Creating Tables
+- JOINS
+- CTE's
+- Window Functions
+- CASE Statements
+- As well as other functions, operators and clauses
 
