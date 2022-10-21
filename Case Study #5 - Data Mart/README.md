@@ -9,8 +9,7 @@
   - [A. Data Cleansing Steps](#a-data-cleansing-steps)
   - [B. Data Exploration](#b-data-exploration)
   - [C. Before & After Analysis](#c-before--after-analysis)
-  - [D. Bonus Question](#d-bonus-question)
-  - [Complete SQL Syntax]
+
 
 ***
 
@@ -51,7 +50,7 @@ Each record in the dataset is related to a specific aggregated slice of the unde
 
 ### A. Data Cleansing Steps
 
-View my solution [here](https://github.com/katiehuangx/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/A.%20Data%20Cleansing%20Steps.md).
+View my solution [here](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/A.Data_Cleansing_Steps.md).
 
 In a single query, perform the following operations and generate a new table in the `data_mart` schema named `clean_weekly_sales`:
 - Convert the `week_date` to a `DATE` format
@@ -76,7 +75,7 @@ In a single query, perform the following operations and generate a new table in 
 
 ### B. Data Exploration 
 
-View my solution [here](https://github.com/katiehuangx/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/B.%20Data%20Exploration.md).
+View my solution [here](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/B.Data_Exploration.md).
 
 1. What day of the week is used for each week_date value?
 2. What range of week numbers are missing from the dataset?
@@ -92,7 +91,7 @@ View my solution [here](https://github.com/katiehuangx/8-Week-SQL-Challenge/blob
 
 ### C. Before & After Analysis 
 
-View my solution [here](https://github.com/katiehuangx/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/C.%20Before%20%26%20After%20Analysis.md).
+View my solution [here](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/C.Before%26After_Analysis.md).
 
 This technique is usually used when we inspect an important event and want to inspect the impact before and after a certain point in time.
 
@@ -105,17 +104,4 @@ Using this analysis approach - answer the following questions:
 
 ***
 
-### D. Bonus Question
 
-View my solution [here](https://github.com/katiehuangx/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/D.%20Bonus%20Question.md).
-
-Which areas of the business have the highest negative impact in sales metrics performance in 2020 for the 12 week before and after period?
-- `region`
-- `platform`
-- `age_band`
-- `demographic`
-- `customer_type`
-
-Do you have any further recommendations for Danny’s team at Data Mart or any interesting insights based off this analysis?
-
-***
