@@ -105,5 +105,13 @@ Generate a table that has 1 single row for every unique visit_id record and has 
 - (Optional column) cart_products: a comma separated text value with products added to the cart sorted by the order they were added to the cart (hint: use the sequence_number)
   
 
-
 ***
+#
+## What can you practice with this case study?
+- Creating Tables
+- JOINS
+- CTE's
+- Window Functions RANK
+- STRING_AGG , WITHIN GROUP 
+- CASE Statements
+- As well as other functions, operators and clauses
