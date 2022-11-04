@@ -9,7 +9,6 @@
 - [Introduction](#introduction)
 - [Case Study Question](#questions)
 - [Bonus Question](#bonus-question)
-  - [B. Customer Transactions](#b-customer-transactions)
 - [What can you practice with this case study?](#what-method-do-you-apply-with-case-study-1)
  
 ## Introduction 
