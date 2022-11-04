@@ -5,6 +5,13 @@
 #
 <img width="200" src="https://user-images.githubusercontent.com/94410139/158028436-eba944af-bdcc-459f-9c2f-fbd868c6c0c1.png">
 
+## 📚 Table of Contents
+- [Introduction](#introduction)
+- [Case Study Question](#questions)
+- [Bonus Question](#bonus-question)
+  - [B. Customer Transactions](#b-customer-transactions)
+- [What can you practice with this case study?](#what-method-do-you-apply-with-case-study-1)
+ 
 ## Introduction 
 Danny seriously loves Japanese food so in the beginning of 2021, he decides to embark upon a risky venture and opens up a cute little restaurant that sells his 3 favourite foods: sushi, curry and ramen.
 
