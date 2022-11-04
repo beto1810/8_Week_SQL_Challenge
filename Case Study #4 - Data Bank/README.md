@@ -5,11 +5,17 @@
 <img src="https://user-images.githubusercontent.com/81607668/130343294-a8dcceb7-b6c3-4006-8ad2-fab2f6905258.png" alt="Image" width="500" height="520">
 
 ## 📚 Table of Contents
+- [Introduction](#introduction)
+- [Case Study Solution](#case-study-questions)
+  - [A. Customer Nodes Exploration](#a-customer-nodes-exploration)
+  - [B. Customer Transactions](#b-customer-transactions)
+- [What can you practice with this case study?](#what-can-you-practice-with-this-case-study)
+ 
 
 
 ***
 
-## introduction
+## Introduction
 Danny launched a new initiative, Data Bank which runs **banking activities** and also acts as the world’s most secure distributed **data storage platform**!
 
 Customers are allocated cloud data storage limits which are directly linked to how much money they have in their accounts. 
