@@ -134,3 +134,21 @@ In this case study - you are required to support Danny’s vision and analyse hi
 
 ### My Solutions:
 - [Click Here](https://github.com/beto1810/8_Week_SQL_Challenge/tree/main/Case%20Study%20%236%20-%20Clique%20Bait)
+
+## 👕 Case Study #7 - Balanced Tree Clothing Co
+
+<img width="200" src="https://8weeksqlchallenge.com/images/case-study-designs/7.png">
+
+##Introduction
+Balanced Tree Clothing Company prides themselves on providing an optimised range of clothing and lifestyle wear for the modern adventurer!
+
+Danny, the CEO of this trendy fashion company has asked you to assist the team’s merchandising teams analyse their sales performance and generate a basic financial report to share with the wider business.
+
+### Questions & Dataset
+- [Click Here!](https://8weeksqlchallenge.com/case-study-7/)
+
+### My Solutions:
+- [Click Here](https://github.com/beto1810/8_Week_SQL_Challenge/tree/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co)
+
+
+
