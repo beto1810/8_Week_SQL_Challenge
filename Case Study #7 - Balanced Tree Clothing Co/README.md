@@ -5,10 +5,10 @@
 ## 📚 Table of Contents
 - [Business Task](#business-task)
 - [Case Study Solution](#case-study-solution)
-  - [A. High Level Sales Analysis](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co/A.High%20Level%20Sales%20Analysis.md)
-  - [B. Transaction Analysis](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co/B.Transaction_Analysis.md)
-  - [C. Product Analysis](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co/C.Product_Analysis.md)
-  - [D. Bonus Challenge](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co/D.Bonus%20Challenge.md)
+  - [A. High Level Sales Analysis](#a-high-level-sales-analysis)
+  - [B. Transaction Analysis](#b-transaction-analysis)
+  - [C. Product Analysis](#c-product-analysis)
+  - [D. Bonus Challenge](#d-bonus-challenge)
 
 ***
 
