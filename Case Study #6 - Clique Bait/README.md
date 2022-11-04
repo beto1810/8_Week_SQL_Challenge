@@ -5,10 +5,10 @@
 ## 📚 Table of Contents
 - [Business Task](#business-task)
 - [Case Study Solution](#case-study-solution)
-  - [1. Entity Relationship Diagram](https://dbdiagram.io/d/634f90314709410195915552)
-  - [2. Digital Analysis](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%236%20-%20Clique%20Bait/2.Digital_Analysis.md)
-  - [3. Product Funnel Analysis](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%236%20-%20Clique%20Bait/3.Product_Funnel_Analysis.md)
-  - [4. Campaigns Analysis](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%236%20-%20Clique%20Bait/4.%20Campaigns_Analysis.md)
+  - [1. Entity Relationship Diagram](#1-entity-relationship-diagram)
+  - [2. Digital Analysis](#2-digital-analysis)
+  - [3. Product Funnel Analysis](#3-product-funnel-analysis)
+  - [4. Campaigns Analysis](#4-campaigns-analysis)
 
 ***
 
