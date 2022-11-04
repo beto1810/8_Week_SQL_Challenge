@@ -5,6 +5,16 @@
 #
 <img width="300" src="https://user-images.githubusercontent.com/94410139/158215978-83465a74-7ccf-457a-8770-f1bdaa0b5343.png">
 
+## 📚 Table of Contents
+- [Introduction](#introduction)
+- [Cleaning](#cleaning)
+- [Case Study Question](#questions)
+  - [A. Pizza Metrics](#a-pizza-metrics-n)
+  - [B. Runner And Customer Experience](#b-runner-and-customer-experience)
+  - [C. Ingredient Optimisation](#c-ingredient-optimisation)
+  - [D. Pricing and Ratings](#d-pricing-and-ratings)
+- [What can you practice with this case study?](#what-method-do-you-apply-with-case-study-2)
+
 ## Introduction
 Did you know that over 115 million kilograms of pizza is consumed daily worldwide??? (Well according to Wikipedia anyway…)
 
