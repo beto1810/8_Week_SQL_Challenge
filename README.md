@@ -17,6 +17,7 @@ Each case study contains a dataset with a series of questions.
 - [Case Study #4 - Data Bank](#-case-study-4---data-bank)
 - [Case Study #5 - Data Marrt](#-case-study-5---data-mart)
 - [Case Study #6 - Clique Bait](#-case-study-6---clique-bait)
+- [Case Study #7 - Balanced Tree Clothing Co](#-case-study-7---balanced-tree-clothing-co)
 #
 
 
@@ -124,7 +125,7 @@ The key business question he wants you to help him answer are the following:
 
 <img width="200" src="https://8weeksqlchallenge.com/images/case-study-designs/6.png">
 
-##Introduction
+## Introduction
 Clique Bait is not like your regular online seafood store - the founder and CEO Danny, was also a part of a digital data analytics team and wanted to expand his knowledge into the seafood industry!
 
 In this case study - you are required to support Danny’s vision and analyse his dataset and come up with creative solutions to calculate funnel fallout rates for the Clique Bait online store.
@@ -139,7 +140,7 @@ In this case study - you are required to support Danny’s vision and analyse hi
 
 <img width="200" src="https://8weeksqlchallenge.com/images/case-study-designs/7.png">
 
-##Introduction
+## Introduction
 Balanced Tree Clothing Company prides themselves on providing an optimised range of clothing and lifestyle wear for the modern adventurer!
 
 Danny, the CEO of this trendy fashion company has asked you to assist the team’s merchandising teams analyse their sales performance and generate a basic financial report to share with the wider business.
