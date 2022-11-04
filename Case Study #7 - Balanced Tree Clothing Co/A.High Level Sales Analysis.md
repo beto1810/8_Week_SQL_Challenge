@@ -1,4 +1,4 @@
-# 🐟 Case Study #7 - Balanced Tree Clothing Co.
+#  👕 Case Study #7 - Balanced Tree Clothing Co.
 <p align="right"> Using Microsoft SQL Server </p>
 
 ## 👩🏻‍💻 Solution - A. High Level Sales Analysis
