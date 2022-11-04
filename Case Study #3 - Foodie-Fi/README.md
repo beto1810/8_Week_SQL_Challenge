@@ -5,6 +5,13 @@
 #
 <img width="300" src="https://user-images.githubusercontent.com/94410139/160449485-68336255-3f3e-45af-94eb-388a3f9af974.png">
 
+## 📚 Table of Contents
+- [Introduction](#introduction)
+- [Case Study Question](#questions)
+  - [A. Customer Journey](#a-customer-journey)
+  - [B. Data Analysis Questions](#b-data-analysis-questions)
+- [What can you practice with this case study?](#what-can-you-practice-with-this-case-study)
+
 ## Introduction
 Subscription based businesses are super popular and Danny realised that there was a large gap in the market - he wanted to create a new streaming service that only had food related content - something like Netflix but with only cooking shows!
 
