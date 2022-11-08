@@ -9,6 +9,7 @@
   - [A. Data Cleansing Steps](#a-data-cleansing-steps)
   - [B. Data Exploration](#b-data-exploration)
   - [C. Before & After Analysis](#c-before--after-analysis)
+- [📃 What can you practice with this case study?](#what-can-you-practice-with-this-case-study)
 
 
 ***
