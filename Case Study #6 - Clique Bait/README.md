@@ -9,6 +9,8 @@
   - [2. Digital Analysis](#2-digital-analysis)
   - [3. Product Funnel Analysis](#3-product-funnel-analysis)
   - [4. Campaigns Analysis](#4-campaigns-analysis)
+- [📃 What can you practice with this case study?](#what-can-you-practice-with-this-case-study)
+
 
 ***
 
