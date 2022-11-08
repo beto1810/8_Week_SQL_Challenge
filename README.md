@@ -18,7 +18,7 @@ Each case study contains a dataset with a series of questions.
 - [Case Study #5 - Data Marrt](#-case-study-5---data-mart)
 - [Case Study #6 - Clique Bait](#-case-study-6---clique-bait)
 - [Case Study #7 - Balanced Tree Clothing Co](#-case-study-7---balanced-tree-clothing-co)
-- [Case Study #8 - Fresh Segment]()
+- [Case Study #8 - Fresh Segment](#-case-study-8---fresh-segments)
 #
 
 
@@ -152,7 +152,7 @@ Danny, the CEO of this trendy fashion company has asked you to assist the team�
 ### My Solutions:
 - [Click Here](https://github.com/beto1810/8_Week_SQL_Challenge/tree/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co)
 
-## 👕 Case Study #8 - Fresh Segments
+## 🍊 Case Study #8 - Fresh Segments
 
 <img width="200" src="https://8weeksqlchallenge.com/images/case-study-designs/8.png">
 
