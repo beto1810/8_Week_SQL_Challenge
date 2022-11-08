@@ -79,7 +79,7 @@ Danny has asked for your assistance to analyse aggregated metrics for an example
 
 ## A. Data Exploration and Cleansing
 
-View my solution [here]().
+View my solution [here](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%238%20-%20Fresh%20Segments/A.Data%20Exploration%20%26%20Cleansing.md).
 
 
 1. Update the `fresh_segments.interest_metrics` table by modifying the `month_year` column to be a date data type with the start of the month
@@ -93,7 +93,7 @@ View my solution [here]().
 
 ## B. Interest Analysis
 
-View my solution [here]().
+View my solution [here](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%238%20-%20Fresh%20Segments/B.Interest%20Analysis.md).
 
 
 1. Which interests have been present in all `month_year` dates in our dataset?
@@ -105,7 +105,7 @@ View my solution [here]().
 
 ## C. Segment Analysis
 
-View my solution [here]().
+View my solution [here](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%238%20-%20Fresh%20Segments/C.Segment%20Analysis.md).
 
 
 1. Using our filtered dataset by removing the interests with less than 6 months worth of data, which are the top 10 and bottom 10 interests which have the largest composition values in any `month_year`? Only use the maximum composition value for each interest but you must keep the corresponding `month_year`
@@ -118,7 +118,7 @@ View my solution [here]().
 
 ## D. Index Analysis
 
-View my solution [here]().
+View my solution [here](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%238%20-%20Fresh%20Segments/D.Index%20Analysis.md).
 
 The `index_value` is a measure which can be used to reverse calculate the average composition for Fresh Segments’ clients.
 
@@ -136,9 +136,8 @@ Average composition can be calculated by dividing the `composition` column by th
 - Creating Tables
 - JOINS
 - CTE's
-- Window Functions RANK
+- Window Functions RANK, LAG, Sliding Windows (Preceding)
 - CASE Statements
 - As well as other functions, operators and clauses
-- PERCENTILE_CONT 
 
 
