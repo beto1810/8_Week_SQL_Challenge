@@ -18,6 +18,7 @@ Each case study contains a dataset with a series of questions.
 - [Case Study #5 - Data Marrt](#-case-study-5---data-mart)
 - [Case Study #6 - Clique Bait](#-case-study-6---clique-bait)
 - [Case Study #7 - Balanced Tree Clothing Co](#-case-study-7---balanced-tree-clothing-co)
+- [Case Study #8 - Fresh Segment]()
 #
 
 
@@ -151,5 +152,22 @@ Danny, the CEO of this trendy fashion company has asked you to assist the teamâ€
 ### My Solutions:
 - [Click Here](https://github.com/beto1810/8_Week_SQL_Challenge/tree/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co)
 
+## ðŸ‘• Case Study #8 - Fresh Segments
 
+<img width="200" src="https://8weeksqlchallenge.com/images/case-study-designs/8.png">
+
+## Introduction
+Danny created Fresh Segments, a digital marketing agency that helps other businesses analyse trends in online ad click behaviour for their unique customer base.
+
+Clients share their customer lists with the Fresh Segments team who then aggregate interest metrics and generate a single dataset worth of metrics for further analysis.
+
+In particular - the composition and rankings for different interests are provided for each client showing the proportion of their customer list who interacted with online assets related to each interest for each month.
+
+Danny has asked for your assistance to analyse aggregated metrics for an example client and provide some high level insights about the customer list and their interests.
+
+### Questions & Dataset
+- [Click Here!](https://8weeksqlchallenge.com/case-study-8/)
+
+### My Solutions:
+- [Click Here](https://github.com/beto1810/8_Week_SQL_Challenge/tree/main/Case%20Study%20%238%20-%20Fresh%20Segments)
 
