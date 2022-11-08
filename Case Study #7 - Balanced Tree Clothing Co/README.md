@@ -9,6 +9,7 @@
   - [B. Transaction Analysis](#b-transaction-analysis)
   - [C. Product Analysis](#c-product-analysis)
   - [D. Bonus Challenge](#d-bonus-challenge)
+- [📃 What can you practice with this case study?](#what-can-you-practice-with-this-case-study)
 
 ***
 
