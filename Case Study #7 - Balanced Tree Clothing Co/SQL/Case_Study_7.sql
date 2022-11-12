@@ -168,7 +168,6 @@ SELECT  category_name,
         total_revenue,
         ROUND (100 *  CAST (total_revenue as float) / sum(total_revenue) over(),2) as percent_revenue       
 FROM CTE_CATEGORY
-GROUP BY category_name,total_revenue
 ORDER BY percent_revenue DESC ;
 
 --9.What is the total transaction “penetration” for each product? 
