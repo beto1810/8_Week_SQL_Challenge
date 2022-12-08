@@ -48,13 +48,12 @@ WITH PURCHASED_RANK AS (
 			       product_name, 
     			       DENSE_RANK() OVER(ORDER BY order_date ) AS RANK
 			FROM sales
-			INNER JOIN menu
+			LEFT JOIN menu
 			ON sales.product_id = menu.product_id 
-)
-SELECT customer_id,product_name
+			)
+SELECT distinct customer_id,product_name
 FROM PURCHASED_RANK 
 WHERE RANK =1 
-GROUP BY customer_id,product_name;
 ```
 #### PURCHASED_RANK table output:
 
