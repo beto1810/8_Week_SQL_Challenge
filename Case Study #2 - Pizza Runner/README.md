@@ -39,7 +39,7 @@ Before going through questions of Case Study #2. We need to clean database ('nul
 This case study has LOTS of questions - they are broken up by area of focus including:
 
 ### A. Pizza Metrics : 
-- [Solution](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/Data_Cleaning.md)
+- [Solution](https://github.com/beto1810/8_Week_SQL_Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/A.Pizza_Metric.md)
 1. How many pizzas were ordered?
 2. How many unique customer orders were made?
 3. How many successful orders were delivered by each runner?
