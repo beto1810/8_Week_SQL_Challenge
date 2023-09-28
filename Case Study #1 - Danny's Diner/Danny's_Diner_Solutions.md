@@ -229,24 +229,18 @@ GROUP BY sales.customer_id;
 
 - Every $1 = 10 points.
 - For sushi $1 = 20 points (2 x 10). 
-- We want to create point column of each type product through CTE :
+- We want to create total point column of each type product through SUM of CASE WHEN:
 	- When the product name is sushi then multiply the price by 20, when not then multiply it by 10.
-- Then sum all the points.
+
 
  
 
 ```sql
-WITH point_table AS(
-                    SELECT product_id,product_name, price,
-                    CASE WHEN product_name = 'sushi' THEN price *20 
-                        ELSE price * 10 END AS point 
-                    FROM menu 
-)
-
-SELECT customer_id, sum(point ) as total_point
-FROM sales s
-INNER JOIN point_table p
-ON s.product_id = p.product_id
+SELECT customer_id,
+        SUM(CASE WHEN product_name = 'sushi' THEN price *20 
+        ELSE price * 10 END ) AS total_point
+FROM sales S
+JOIN menu M ON S.product_id = M.product_id
 GROUP BY  customer_id;
 ```
 #### Result
