@@ -32,7 +32,7 @@ _`*` represent new columns_
 
 | Columns | Actions to take |
 | ------- | --------------- |
-| week_date | Convert to `DATE` using `TO_DATE`
+| week_date | Convert to `DATE` using `CONVERT`
 | week_number* | Extract number of week using `DATE_PART` 
 | month_number* | Extract number of month using `DATE_PART` 
 | calendar_year* | Extract year using `DATE_PART`
