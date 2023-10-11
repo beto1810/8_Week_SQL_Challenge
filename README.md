@@ -11,7 +11,7 @@ Each case study contains a dataset with a series of questions.
 #
 
 ## 📌 Case Studies
-- [Case Study #1 - Danny's Diner](#-case-study-1---dannys-diner)
+- [Case Study #1 - Danny's Dinner](#-case-study-1---dannys-diner)
 - [Case Study #2 - Pizza Runner](#-case-study-2---pizza-runner)
 - [Case Study #3 - Foodie-Fi](#-case-study-3---foodie-fi)
 - [Case Study #4 - Data Bank](#-case-study-4---data-bank)
