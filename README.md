@@ -22,14 +22,14 @@ Each case study contains a dataset with a series of questions.
 #
 
 
-## 🍜 Case Study #1 - Danny's Diner
+## 🍜 Case Study #1 - Danny's Dinner
 
 <img width="200" src="https://user-images.githubusercontent.com/94410139/158028436-eba944af-bdcc-459f-9c2f-fbd868c6c0c1.png">
 
 ## Introduction 
 Danny seriously loves Japanese food so in the beginning of 2021, he decides to embark upon a risky venture and opens up a cute little restaurant that sells his 3 favourite foods: sushi, curry and ramen.
 
-Danny’s Diner is in need of your assistance to help the restaurant stay afloat - the restaurant has captured some very basic data from their few months of operation but have no idea how to use their data to help them run the business.
+Danny’s Dinner is in need of your assistance to help the restaurant stay afloat - the restaurant has captured some very basic data from their few months of operation but have no idea how to use their data to help them run the business.
 
 ### Questions & Dataset
 - [Click Here](https://8weeksqlchallenge.com/case-study-1/)
