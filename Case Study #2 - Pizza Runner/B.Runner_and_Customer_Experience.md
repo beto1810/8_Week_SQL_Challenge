@@ -33,7 +33,7 @@ FROM #customer_orders c
 INNER JOIN #runner_orders r 
 ON C.order_id = R.order_id
 WHERE r.cancellation IS NULL 
-GROUP BY  runner_id,r.order_id,order_time, pickup_time)
+                )
 
 SELECT runner_id, AVG(time)  AS average_time
 FROM time_table
